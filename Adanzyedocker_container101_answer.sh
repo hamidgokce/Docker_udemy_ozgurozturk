@@ -3,18 +3,17 @@ Bunun için ayrı ayrı listeleme komutlarını girelim. Ve ardından temizlik
 yapmak adına makinenizdeki tüm containerları, imageleri ve volumeleri temizleyelim.
 Bunun iki yöntemi var. Bakalım siz kolay olanı mı seçeceksiniz. 
 
-docker container ls
-docker container ls -a
+docker container ls # sadece calisanlar
+docker container ls -a # butun containerlar
 docker container ps 
 docker container ps -a
-docker volume list
+docker volume list 
 docker volume ls 
 docker image ls 
 docker volume list 
-docker image rm ...
-docker image prune 
-docker image prune -a 
-docker volume rm 
+docker image rm ... # tek volumeler icin
+docker image prune # sistemde bulunan herhangi bir containera baglanmamis olan volumeler
+docker image prune -a # force ederek silmektedir / her imageler
 
 2: centos, alpine, nginx, httpd:alpine, ozgurozturknet/adanzyedocker, 
 ozgurozturknet/hello-app, ozgurozturknet/app1 isimli imajları çalıştığımız
@@ -41,21 +40,20 @@ docker container ps
 
 5: Yarattığımız bu contaier’ın loglarına bakalım.
 
-docker container logs ...
+docker container logs ... # ismi veya id
 
 6: Container’ı durduralım, ardından yeniden çalıştıralım ve 
 son olarak container’ı sistemden kaldıralım. 
 
 docker container stop ...
 docker container start ...
-docker container rm -f ... (calismaya devam ettigi icin -f yi kullaniyoruz veya
-ilk once stop ederiz sonra tekrar calistiririz)
+docker container rm -f ... # calismaya devam ettigi icin -f yi kullaniyoruz veya ilk once stop ederiz sonra tekrar calistiririz
 
 7: ozgurozturknet/adanzyedocker isimli imajdan websunucu adında detached ve 
 “-p 80:80” ile portu publish edilmiş bir container yaratalım. 
 Kendi bilgisayarımızın browserından bu web sitesine erişelim.
 
-docker container run -d -p 80:80 --name websunu ozgurozturknet/adanzyedocker
+docker container run -d -p 80:80 --name websunucu ozgurozturknet/adanzyedocker
 127.0.0.1 ip si ile de browserdan gorebiliriz
 
 8: websunucu adlı bu container’ın içerisine bağlanalım. 
@@ -66,7 +64,7 @@ ekleme yapabildiğimizi görmek için refresh edelim. Sonrasında
 container içerisinden exit ile çıkalım.
 
 docker ps 
-docker container exec -it ... sh
+docker container exec -it ... sh # icerisinde shell acmak istiyoruz
 cd /usr/local/apache2/htdocs
 ls 
 echo “denemedir” >> index.html
@@ -79,7 +77,8 @@ docker container rm -f ...
 10: alpine isimli imajdan bir container yaratalım. Ama varsayılan 
 olarak çalışması gereken uygulama yerine “ls” uygulamasının çalışmasını sağlayalım.
 
-docker container run alpine ls 
+docker container run alpine # default programi calistirir
+docker container run alpine ls # container icerisindeki dosyalari cikartiriz
 
 11: “alistirma1” isimli bir volüme yaratalım. 
 
@@ -138,7 +137,7 @@ Bilgisayarımızda yarattığımız klasörü container’ın içerisindeki
 yarattığımız klasörün içerisindeki index.html dosyasını edit edelim ve 
 yeni yazılar ekleyelim. Web sayfasını refresh ederek bunların geldiğini görelim.
 
-docker container run -d -p 80:80 --name websunucu1 -v c:/deneme:/usr/local/apache2/htdocs ozgurozturknet/adanzyedockerdocker ps 
+docker container run -d -p 80:80 --name websunucu1 -v c:/deneme:/usr/local/apache2/htdocs ozgurozturknet/adanzyedockerdocker
 browserdan degisiklikleri gorebiliriz
 
 17: Tüm çalışan container’ları silelim. 
