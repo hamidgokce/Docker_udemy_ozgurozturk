@@ -12,7 +12,7 @@ services:
       - webnet
 
    websrv:
-     build: .
+     build: . # image yi konumdaki docker file yi kullanarak olustur
      depends_on:
        - mysqldb
      ports:

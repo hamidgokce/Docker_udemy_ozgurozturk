@@ -1,0 +1,41 @@
+version: "3.7"
+# we show which docker version to use.
+# The docker-compose file created will use the 3.7 version. 
+# The features to be written below should also be in accordance with version 3.7
+services:
+# we define containers under the heading services
+  veritabani:
+    image: mysql:5.7
+    restart: always # we want it to always start if the container is closed
+    volumes: # we can connect multiple volumes
+      - verilerim:/var/lib/mysql 
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: somewordpress
+    networks:
+      - wpnet
+  wordpress: 
+    image: wordpress:latest
+    depends_on:
+      - veritabani 
+    restart: always
+    ports:
+     - "80:80"
+    environment:
+      WORDPRESS_DB_HOST: veritabani:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    networks:
+      - wpnet
+volumes:
+  verilerim:
+networks:
+  wpnet:
+    driver: bridge
+
+  
+  
+  
