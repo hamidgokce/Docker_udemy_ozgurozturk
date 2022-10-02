@@ -1,1 +1,1 @@
-flask
+flask # python dilinde web uygulamalari olusturmak icin uygulamamiz gereken framework

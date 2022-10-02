@@ -1,6 +1,7 @@
 'use strict';
 
-const express = require('express');
+const express = require('express'); 
+// express frameworkunu kullaniyoruz ve yayin yapiyoruz
 
 // Constants
 const PORT = 8080;
