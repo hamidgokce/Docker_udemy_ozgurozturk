@@ -4,7 +4,8 @@
 FROM nginx:latest
 
 
-# label ile de key value pair olarak bu imajla ilgili bilgileri giriyoruz. her iki talimat da imajın içindeki sistemle alakalı değil.
+# label ile de key value pair olarak bu imajla ilgili bilgileri giriyoruz. her iki talimat da imajın içindeki sistemle 
+# alakalı değil.
 # her ikisi de imajın metadatasında saklanıyor. imajla alakali bilgiler. 
 LABEL maintainer="Ozgur Ozturk @ozgurozturknet"
 LABEL version="1.0"
@@ -16,7 +17,7 @@ ENV KULLANICI="Dunyali"
 # nginx debian-slim imajı baz alınarak oluşturulmuştur.
 # bu imajda geriye doğru uyumluluk sorunları var ve o nedenle update olmuyor. 
 #Bu url'leri sources.list'e ekleyerek update olabilmesini sağlıyoruz
-#RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
+# RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
 
 # Uygulama depolarından mevcut paketlerin en son listesini çekip güncelliyoruz. 
 RUN apt-get update
@@ -31,9 +32,12 @@ WORKDIR /usr/share/nginx/html
 COPY Hello_docker.html /usr/share/nginx/html
 
 # sistemin düzgün çalıştığını ve nginx daemon'ının web sitesini publish etmekte bir sorun yaşamadığını test ediyoruz
+# ngnix process olarak calisiyordur ama web sitesi yayinlanmiyordur.
+# bu sayede otomatik olarak kendisini iyilestiren sistemler olusturabiliriz
+# interval ==> her 30 saniye de kontrol et / 5 saniye sonra healthchecki calistir. 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 CMD curl -f http://localhost/ || exit 1
 
-# bu imajdan container yaratıldığı zaman çalışmasını istediğimiz komutu buraya giriyoruz
+# bu imajdan container yaratıldığı zaman çalışmasını istediğimiz komutu buraya giriyoruz ==> CMD
 # /usr/share/nginx/html klasörüne geçiyor ve sed aracılığıyla Hello_docker.html dosyasının içerisindeki
 # Kullanici kelimesini $KULLANICI env variable'ının değeriyle Hostname kelimesini de $HOSTNAME ile değiştiriyor ve 
 # dosyanın içeriğini index.html'e adlı yeni bir dosyaya yazıyoruz.

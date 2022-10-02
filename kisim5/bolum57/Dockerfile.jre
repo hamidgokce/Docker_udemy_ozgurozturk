@@ -1,0 +1,5 @@
+FROM mcr.microsoft.com/java/jre:8-zulu-alpine
+# jdk icerisinde butun software var. jre icerisinde sadece java calistirmak icin gerekli yazilim var
+COPY /uygulama /uygulama
+WORKDIR /uygulama
+CMD [ "java", "uygulama" ]
