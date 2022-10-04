@@ -12,7 +12,13 @@ services:
       - webnet
 
    websrv:
-     build: .
+     image: ozgurozturknet/webkayit # build . ==> imagenin onceden olusturulmasi gerekiyor.
+     deploy:
+        replicas: 3
+        update_config: # ilerde update edecek olursak update kurallarini belirliyoruz
+          parallelism: 2 
+          delay: 10s
+          order: stop-first # once durdur sonra yeni olustur
      depends_on:
        - mysqldb
      ports:
@@ -27,4 +33,4 @@ services:
        DB_NAME: proje
 networks:
   webnet:
-    driver: bridge
+    driver: overlay # bridge docker compose da olusturmustuk
