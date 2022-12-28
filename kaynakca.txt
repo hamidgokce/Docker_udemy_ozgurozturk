@@ -1,4 +1,4 @@
-aEğitimi oluştururken yararlandığım kaynakların listesine bu dökümandan erişebilirsiniz.
+Eğitimi oluştururken yararlandığım kaynakların listesine bu dökümandan erişebilirsiniz.
 
 https://docs.docker.com
 https://en.wikipedia.org/wiki/Docker_(software)#cite_note-docker-announcement-13
