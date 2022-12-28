@@ -1,4 +1,4 @@
-Eğitimi oluştururken yararlandığım kaynakların listesine bu dökümandan erişebilirsiniz.
+aEğitimi oluştururken yararlandığım kaynakların listesine bu dökümandan erişebilirsiniz.
 
 https://docs.docker.com
 https://en.wikipedia.org/wiki/Docker_(software)#cite_note-docker-announcement-13
@@ -15,3 +15,4 @@ https://www.docker.com/products/container-runtime
 https://searchservervirtualization.techtarget.com/feature/The-history-of-Dockers-climb-in-the-container-management-market
 https://searchitoperations.techtarget.com/definition/Docker-image
 https://blog.codeship.com/building-minimal-docker-containers-for-go-applications/
+
